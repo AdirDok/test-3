@@ -7,6 +7,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
+
 app.get('/serverss', async (req, res) => {
 
     try {
@@ -59,8 +60,6 @@ app.put('/server/:id', async (req, res) => {
         where serverss.id = ${req.params.id}
         `)
 
-       
-        console.log(status)
 
         if (status.status == 1) {
             return res.send({ msg: 'server online' })

@@ -1,33 +1,36 @@
 import React from 'react';
 import Switch from '@mui/material/Switch';
 
-export default function Server_card({ server, setUpdate }) {
+export default function Server_card({ server, setUpdateOfline, setUpdateOnline, setUpdate }) {
   let ServsrStatus = ''
   const { status } = server
 
   const updateServer = async (e) => {
 
-    // console.log(e.target)
-
-
     const res = await fetch(`http://localhost:9001/server/${server.id}`, {
       method: 'put'
     })
 
-    // if (res.status != 200) {
-    //   e.target.preventDefault()
-    // }
-
     const data = await res.json()
-    // console.log(data);
-    // console.log(res.status);
+    console.log(data)
 
-    setUpdate(up => !up)
+
+
+    if (setUpdateOfline) {
+      setUpdateOfline(prev => !prev)
+      return
+
+    } else if (setUpdateOnline) {
+      setUpdateOnline(prev => !prev)
+      return
+
+    } else {
+      setUpdate(prev => !prev)
+    }
 
   }
 
-  status == 0 ? ServsrStatus = 'ofline' : ServsrStatus = 'online'
-
+  status ? ServsrStatus = 'ofline' : ServsrStatus = 'online'
 
 
   return (
@@ -38,7 +41,6 @@ export default function Server_card({ server, setUpdate }) {
       <div >
         <p>{ServsrStatus}</p>
         <Switch onClick={(e) => updateServer(e)} checked={!!status} />
-
       </div>
     </div>
   )

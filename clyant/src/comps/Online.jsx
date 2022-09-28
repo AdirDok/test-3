@@ -5,6 +5,8 @@ import Server_card from './Server_card';
 export default function Online({ update, setUpdate }) {
 
   const [onlineArr, setOnlineArr] = useState([]);
+  const [updateOnline, setUpdateOnline] = useState(false)
+
 
 
   useEffect(() => {
@@ -13,21 +15,15 @@ export default function Online({ update, setUpdate }) {
       const data = await res.json()
       // console.log(data);
       setOnlineArr(data)
-
     })()
-  }, [update]);
-
-
+  }, [updateOnline]);
 
   return <div>
-
-
     {
       onlineArr.map((server, i) => {
-        return <Server_card key={i*3} server={server} setUpdate={setUpdate} />
+        return <Server_card key={i * 3} server={server} setUpdateOnline={setUpdateOnline} />
       })
     }
-
 
   </div>;
 }

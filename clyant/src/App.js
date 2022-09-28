@@ -12,10 +12,7 @@ export default function App() {
     <BrowserRouter>
       <div>
         <Heder />
-
-        <Main update={update} setUpdate={setUpdate}  />
-
-
+        <Main update={update} setUpdate={setUpdate} />
       </div>
     </BrowserRouter>
   )
